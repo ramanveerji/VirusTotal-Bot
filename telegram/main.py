@@ -73,17 +73,17 @@ def checkvirus(message):
     hash = botfunctions.uploadfile(file)
     os.remove(file)
     print(f'ID: {message.id}  HASH: {hash}')
-    
+
     if hash == 0:
         app.edit_message_text(message.chat.id, msg.id, "✖️ Failed")
         print("HASH is 0")
         return
-        
+
     app.edit_message_text(message.chat.id, msg.id, '⚙️ Checking...')
     print(f"Checking: ID:  {message.id}  size: {message.document.file_size}")
     maintext, checktext, signatures, link = botfunctions.cleaninfo(hash)
-    
-    if maintext == None:
+
+    if maintext is None:
         app.edit_message_text(message.chat.id, msg.id, "✖️ Failed")
         print("Function returned None")
         return
@@ -134,7 +134,7 @@ def callbck(client: pyrogram.client.Client, message: pyrogram.types.CallbackQuer
                                                 InlineKeyboardButton( "🔗 View on VirusTotal", url=url )
                                                 ]]))
 
-    if action == "D":
+    elif action == "D":
         app.edit_message_text(message.message.chat.id, message.message.id, checktext,
                 reply_markup=InlineKeyboardMarkup([[  
                                                         InlineKeyboardButton( "🔙 Back", callback_data=f"B|{tlink}"),
@@ -144,7 +144,7 @@ def callbck(client: pyrogram.client.Client, message: pyrogram.types.CallbackQuer
                                                 InlineKeyboardButton( "🔗 View on VirusTotal", url=url )
                                                 ]]))
 
-    if action == "S":
+    elif action == "S":
         app.edit_message_text(message.message.chat.id, message.message.id, signatures,
                 reply_markup=InlineKeyboardMarkup([[  
                                                         InlineKeyboardButton( "🔙 Back", callback_data=f"B|{tlink}"),

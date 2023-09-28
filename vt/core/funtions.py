@@ -11,13 +11,11 @@ def random_header_id():
 def file_info_fill(data: json,raw=0):
     if raw:
         return data
-        
+
     data = data["data"]
     file_type_info = {}
     total_votes = {}
     last_analysis_results = []
-    tags = []
-
     file_type = data["type"]
     id = data["id"]
     attributes = data["attributes"]
@@ -66,8 +64,7 @@ def file_info_fill(data: json,raw=0):
     }
     magic= attributes["magic"] if "magic" in attributes else None
     first_submission_date = datetime.fromtimestamp(attributes["first_submission_date"])
-    for i in attributes["tags"]:
-        tags.append(i)
+    tags = list(attributes["tags"])
     last_analysis_date = datetime.fromtimestamp(attributes["last_analysis_date"])
 
     attributes = attributes["last_analysis_stats"]
