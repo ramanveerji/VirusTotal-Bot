@@ -21,7 +21,7 @@ telegraph.create_account(short_name='VirusTotal')
 def strt(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
 
     START = f'👋🏻 Hello! {message.from_user.mention}\
-    \nI am a Bot based on **[VT-SCRAP](https://github.com/Brijeshkrishna/virustotal-scrapper)**\
+    \nI am a Bot based on **Virus Total Bot** by RS\
 \
     \n\n__• You can send the file to the bot or forward it from another channel, and it will check file to **[VirusTotal](http://virustotal.com/)** with over **70** different antiviruses.\
 \
@@ -33,7 +33,7 @@ def strt(client: pyrogram.client.Client, message: pyrogram.types.messages_and_me
 
     app.send_message(message.chat.id, START, reply_to_message_id=message.id, disable_web_page_preview=True,
     reply_markup=InlineKeyboardMarkup([[
-                                           InlineKeyboardButton( "📦 Source Code", url="https://github.com/bipinkrish/VirusTotal-Bot" )
+                                           InlineKeyboardButton( "📦 Contact Admin", url="https://telegram.me/rs_m_bot" )
                                       ]]))
 
 
