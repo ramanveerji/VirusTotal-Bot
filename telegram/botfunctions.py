@@ -5,8 +5,7 @@ from vt import Virustotal
 vtapi = Virustotal()
 
 def uploadfile(file):
-    hash = vtapi.upload_file(file)
-    return hash
+    return vtapi.upload_file(file)
 
 def counttests(obj):
     dcount = 0
@@ -35,12 +34,12 @@ def counttests(obj):
 
 def cleaninfo(hash):
     obj = vtapi.file_info(hash)
-    if obj == None:
+    if obj is None:
         print("File does not Exist")
         return None,None,None, None
 
     D,U,N,DL,UL,NL,DR = counttests(obj)
-    
+
     fronttext = f'🧬 **Detections**: __{D} / {D+U}__\
         \n\n🔖 **File Name**: __{obj.filename}__\
         \n🔒 **File Type**: __{obj.type_description} ({obj.file_type_info["file_type"]})__\
@@ -49,8 +48,6 @@ def cleaninfo(hash):
         \n\n🔬 **First Analysis**\n• __{obj.first_submission_date}__\
         \n🔭 **Last Analysis**\n• __{obj.last_modification_date}__\
         \n\n🎉 **Magic**\n• __{obj.magic}__'
-        #\n\n⚜️ [Link to VirusTotal](https://virustotal.com/gui/file/{hash})'
-
     testtext = '**❌ - Malicious\n✅ - UnDetected\n⚠️ -  Not Suported**\n➖➖➖➖➖➖➖➖➖➖\n'
     for ele in DL:
         testtext = f'{testtext}❌ {ele}\n'
@@ -63,9 +60,9 @@ def cleaninfo(hash):
     for i in range(len(DR)):
         signatures = f'{signatures}❌ {DL[i]}\
     \n╰ {DR[i]}\n'
-    
+
     if D == 0:
         signatures = "✅ Your File is Safe"
-        
+
     link = f'https://virustotal.com/gui/file/{hash}'
     return fronttext,testtext,signatures,link
